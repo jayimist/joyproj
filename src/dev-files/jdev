@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# joyproj • by jayimist@github.com • joyproj jfile templates
+# Change at your liking!
+
+PROJECT="/path/to/proj"
+SESSION="projname"
+
+cd "$PROJECT"
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux attach-session -t "$SESSION"
+    exit 0
+fi
+
+tmux new-session -d -s "$SESSION"
+
+tmux send-keys -t "$SESSION:0.0" "nvim things" Enter
+tmux split-window -h -t "$SESSION"
+tmux attach-session -t "$SESSION"

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# joyproj • by jayimist@github.com • joyproj jfile templates
+# Change at your liking!
+
+PROJECT="/path/to/proj"
+
+~/.python/bin/python3 "${PROJECT}/build/projname/projname.py" "$@"

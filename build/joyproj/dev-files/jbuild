@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# joyproj • by jayimist@github.com • joyproj jfile templates
+# Change at your liking!
+
+PROJECT="/path/to/proj"
+
+echo "[jbuild]: Building joyproj ..."
+
+    rm -r "${PROJECT}/build/projname/"*
+    cp -r "${PROJECT}/src/"* "${PROJECT}/build/projname/"
+    mv "${PROJECT}/build/projname/main.py" "${PROJECT}/build/projname/projname.py"
+
+echo "  Done"
