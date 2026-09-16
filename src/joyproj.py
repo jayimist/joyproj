@@ -1,7 +1,7 @@
 import sys, json, shutil, subprocess
 from pathlib import Path
 
-VERSION = "0.2.1-wip"
+VERSION = "0.2.2-wip"
 PROJECT_DIR_PATH = Path(__file__).parent
 PROJECTS_FILE_PATH = PROJECT_DIR_PATH / "projects.json"
 DEVFILES_DIR_PATH = PROJECT_DIR_PATH / "dev-files"
@@ -115,6 +115,13 @@ def cli(args: list[str]) -> None:
             return
 
         proj_new(args[2])
+
+    elif args[1] in ("a", "add"):
+        if len(args) < 3:
+            print("No project argument for 'joyproj add'")
+            return
+
+        proj_add(args[2])
 
     elif args[1] in ("R", "remove"):
         if len(args) < 3:
