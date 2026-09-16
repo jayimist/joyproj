@@ -1,7 +1,7 @@
 import sys, json, shutil, subprocess
 from pathlib import Path
 
-VERSION = "0.1-wip"
+VERSION = "0.2.1-wip"
 PROJECT_DIR_PATH = Path(__file__).parent
 PROJECTS_FILE_PATH = PROJECT_DIR_PATH / "projects.json"
 DEVFILES_DIR_PATH = PROJECT_DIR_PATH / "dev-files"
