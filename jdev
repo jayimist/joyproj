@@ -16,7 +16,7 @@ fi
 
 tmux new-session -d -s "$SESSION"
 
-tmux send-keys -t "$SESSION:0.0" "nvim src/joyproj.py src/projects.json jdev jbuild jrun" Enter
+tmux send-keys -t "$SESSION:0.0" "nvim src/joyproj.py src/projects.json README.md jdev jbuild jrun" Enter
 tmux split-window -h -t "$SESSION"
 tmux attach-session -t "$SESSION"
 

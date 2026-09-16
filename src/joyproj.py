@@ -30,10 +30,12 @@ Commands:
   • v, version - Shows the version along side additional information.
   • l, ls, list - Lists the projects for the CLI to interact with.
   • n, new - Creates a new project in projects.json to be used in print_help CLI, along side development files to run, build, or test your project.
+  • a, add - Adds the project in projects.json but doesn't give you the dev files, etc. It ONLY adds project data to projects.json.
+  • R, remove - Removes the project in projects.json, however development files will still roam to be manually deleted.
   • d, dev, develop - Runs the development file in your project, which puts you into your projects development environment.
-  • b, build - Runs the build file in your project, which builds your project in the build directory, or where ever the user set it to. (NOT RECOMMENDED)
-  • r, run - Runs the run/test file in your project, which runs the current build of your project, or whatever the user decides to for. (NOT RECOMMENDED)
-  • R, remove - Removes the project in projects.json, however development files will still roam to be manually deleted. (NOT IMPLEMENTED)
+  • b, build - Runs the build file in your project, which builds your project in the build directory, or where ever the user set it to.
+  • r, run - Runs the run/test file in your project, which runs the current build of your project, or whatever the user decides to for.
+      -> Note for using build and run commands. It may cause problems due to not being in the projects directory. You can run the dev files manually instead and use the command 'jdev' to be in the projects directory.`
 ''')
 
 def projs_read() -> dict[str, str]:
@@ -58,13 +60,16 @@ def proj_list() -> None:
     for name, path in projs.items():
         print(f"  • {name} - {path}")
 
-def proj_new(proj_name: str) -> None:
-    # Add project into projects.json
+def proj_add(proj_name: str) -> None:
     projs = projs_read()
 
     projs[proj_name] = str(CWD)
 
     projs_write(projs)
+
+def proj_new(proj_name: str) -> None:
+    # Add project into projects.json
+    proj_add(proj_name)
 
     # Copy all files from dev-files to current working directory.
     for file in DEVFILES_DIR_PATH.iterdir():
