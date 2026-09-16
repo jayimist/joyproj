@@ -4,11 +4,25 @@
 # Change at your liking!
 
 PROJECT="/home/jay/Projects/joyproj"
+OLD_WD="$PWD"
 
-echo "[jbuild]: Building joyproj ..."
+if [ "$1" = "in-home-dir" ]; then
+    cd ~/.joyproj
 
-    rm -r "${PROJECT}/build/joyproj/"*
-    cp -r "${PROJECT}/src/"* "${PROJECT}/build/joyproj/"
-    mv "${PROJECT}/build/joyproj/main.py" "${PROJECT}/build/joyproj/joyproj.py"
+    echo "[jbuild]: Building joyproj in ~/.joyproj ..."
+
+        cp -r "${PROJECT}/src/dev-files" .
+        cp "${PROJECT}/src/joyproj.py" .
+
+    echo "  Done"
+    exit 0
+fi
+
+cd "$PROJECT"
+
+echo "[jbuild]: Building joyproj in project's build directory ..."
+
+rm -r ./build/joyproj/*
+cp -r ./src/* ./build/joyproj
 
 echo "  Done"

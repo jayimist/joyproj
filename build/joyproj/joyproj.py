@@ -1,7 +1,7 @@
 import sys, json, shutil, subprocess
 from pathlib import Path
 
-VERSION = "0.0-wip"
+VERSION = "0.1-wip"
 PROJECT_DIR_PATH = Path(__file__).parent
 PROJECTS_FILE_PATH = PROJECT_DIR_PATH / "projects.json"
 DEVFILES_DIR_PATH = PROJECT_DIR_PATH / "dev-files"
@@ -31,9 +31,9 @@ Commands:
   • l, ls, list - Lists the projects for the CLI to interact with.
   • n, new - Creates a new project in projects.json to be used in print_help CLI, along side development files to run, build, or test your project.
   • d, dev, develop - Runs the development file in your project, which puts you into your projects development environment.
-  • b, build - Runs the build file in your project, which builds your project in the build directory, or where ever the user set it to.
-  • r, run - Runs the run/test file in your project, which runs the current build of your project, or whatever the user decides to for.
-  • R, remove - Removes the project in projects.json, however development files will still roam to be manually deleted.
+  • b, build - Runs the build file in your project, which builds your project in the build directory, or where ever the user set it to. (NOT RECOMMENDED)
+  • r, run - Runs the run/test file in your project, which runs the current build of your project, or whatever the user decides to for. (NOT RECOMMENDED)
+  • R, remove - Removes the project in projects.json, however development files will still roam to be manually deleted. (NOT IMPLEMENTED)
 ''')
 
 def projs_read() -> dict[str, str]:
@@ -75,6 +75,18 @@ def proj_new(proj_name: str) -> None:
 
     print("Your Joyful project is ready! Feel free to configure more in the dev files.")
 
+def proj_remove(proj_name: str) -> None:
+    projs = projs_read()
+
+    try:
+        del projs[proj_name]
+    except KeyError:
+        print(f"Project '{proj_name}' does not exist.")
+        return
+
+    projs_write(projs)
+
+    print(f"Project '{proj_name}' was removed.")
 
 
 # Interfaces
@@ -99,6 +111,13 @@ def cli(args: list[str]) -> None:
 
         proj_new(args[2])
 
+    elif args[1] in ("R", "remove"):
+        if len(args) < 3:
+            print("No project argument for 'joyproj remove'")
+            return
+
+        proj_remove(args[2])
+
     elif args[1] in ("d", "dev", "develop"):
         if len(args) < 3:
             print("No project argument for 'joyproj dev'")
@@ -122,6 +141,7 @@ def cli(args: list[str]) -> None:
 
     else:
         print(f"The command '{args[1]}' does not exist for 'joyproj'")
+
 
 
 # Main
