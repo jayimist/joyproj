@@ -1,7 +1,7 @@
 import sys, json, shutil, subprocess
 from pathlib import Path
 
-VERSION = "0.2.2-wip"
+VERSION = "0.2.3-wip"
 PROJECT_DIR_PATH = Path(__file__).parent
 PROJECTS_FILE_PATH = PROJECT_DIR_PATH / "projects.json"
 DEVFILES_DIR_PATH = PROJECT_DIR_PATH / "dev-files"
@@ -66,6 +66,8 @@ def proj_add(proj_name: str) -> None:
     projs[proj_name] = str(CWD)
 
     projs_write(projs)
+
+    print(f"Added project '{proj_name}' into projects.json!")
 
 def proj_new(proj_name: str) -> None:
     # Add project into projects.json

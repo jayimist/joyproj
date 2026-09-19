@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-# joyproj • by jayimist@github.com • joyproj jfile templates
+# joyproj • by jayimist@github.com • joyproj dev-file templates
 # Change at your liking!
 
+SESSION="proj"
 PROJECT="/path/to/proj"
-SESSION="projname"
+OLD_WD="$PWD"
 
 cd "$PROJECT"
 
@@ -18,3 +19,5 @@ tmux new-session -d -s "$SESSION"
 tmux send-keys -t "$SESSION:0.0" "nvim things" Enter
 tmux split-window -h -t "$SESSION"
 tmux attach-session -t "$SESSION"
+
+cd "$OLD_WD"

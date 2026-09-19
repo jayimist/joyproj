@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
-# joyproj • by jayimist@github.com • joyproj jfile templates
+# joyproj • by jayimist@github.com • joyproj dev-file templates
 # Change at your liking!
 
+SESSION="proj"
 PROJECT="/path/to/proj"
+OLD_WD="$PWD"
 
-echo "[jbuild]: Building joyproj ..."
+if [ "$1" = "in-home-dir" ]; then
+    # stuff
+fi
 
-    rm -r "${PROJECT}/build/projname/"*
-    cp -r "${PROJECT}/src/"* "${PROJECT}/build/projname/"
-    mv "${PROJECT}/build/projname/main.py" "${PROJECT}/build/projname/projname.py"
+cd "$PROJECT"
+
+echo "[jbuild]: Building proj in project's build directory ..."
+
+rm -r ./build/proj/*
+cp -r ./src/* ./build/proj
 
 echo "  Done"
